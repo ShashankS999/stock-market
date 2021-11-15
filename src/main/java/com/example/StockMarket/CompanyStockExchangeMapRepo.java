@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Transactional
 public interface CompanyStockExchangeMapRepo extends JpaRepository<CompanyStockExchangeMap,Integer>
 {
-
+	void deleteAllByCompany(Company company);
 }

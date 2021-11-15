@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -13,24 +14,24 @@ public class StockPrice
 {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	private String exchangeName;
 	
 	private String companyCode;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Company company;
 	
 	private Date date;
 	
 	private Time time;
 	
-	private double sharePrice;
+	private Double sharePrice;
 	
 	public StockPrice() {}
 
-	public StockPrice(String exchangeName, String companyCode, Date date, Time time, double sharePrice)
+	public StockPrice(String exchangeName, String companyCode, Date date, Time time, Double sharePrice)
 	{
 		super();
 		this.exchangeName = exchangeName;
@@ -40,12 +41,12 @@ public class StockPrice
 		this.sharePrice = sharePrice;
 	}
 
-	public int getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}
@@ -100,12 +101,12 @@ public class StockPrice
 		this.time = time;
 	}
 
-	public double getSharePrice()
+	public Double getSharePrice()
 	{
 		return sharePrice;
 	}
 
-	public void setSharePrice(double sharePrice)
+	public void setSharePrice(Double sharePrice)
 	{
 		this.sharePrice = sharePrice;
 	}

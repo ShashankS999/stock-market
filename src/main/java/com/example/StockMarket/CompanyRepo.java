@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 public interface CompanyRepo extends JpaRepository<Company,Integer>
 {
 	boolean existsByCompanyName(String name);
+	boolean existsByCompanyNameAndDeactivated(String name,boolean value);
 	void deleteByCompanyName(String name);
 	Company findByCompanyName(String name);
+	Company findByCompanyNameAndDeactivated(String name,boolean value);
 }

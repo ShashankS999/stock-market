@@ -1,26 +1,25 @@
 package com.example.StockMarket;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Company 
 {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	private String companyName;
 	
-	private double turnover;
+	private Double turnover;
 	
 	private String ceo;
 	
@@ -28,18 +27,22 @@ public class Company
 	
 	private String companyBrief;
 	
-	@OneToOne(mappedBy="company",cascade=CascadeType.REMOVE)
+	private boolean deactivated;
+	
+	@OneToOne(fetch = FetchType.LAZY,mappedBy="company",cascade=CascadeType.REMOVE)
+	@JsonIgnore
 	private IPO ipo;
 	
-	@OneToMany(targetEntity=CompanyStockExchangeMap.class,mappedBy="company")
-	private List<CompanyStockExchangeMap> compstockmap=new ArrayList<>();
-	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Sector sector;
 	
-	public Company() {}
+	public Company() 
+	{
+		this.setDeactivated(false);
+	}
 
-	public Company(String companyName, double turnover, String ceo, String boardOfDirectors, String companyBrief)
+	public Company(String companyName, Double turnover, String ceo, String boardOfDirectors, String companyBrief)
 	{
 		super();
 		this.companyName = companyName;
@@ -49,12 +52,12 @@ public class Company
 		this.companyBrief = companyBrief;
 	}
 
-	public int getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}
@@ -69,12 +72,12 @@ public class Company
 		this.companyName = companyName;
 	}
 
-	public double getTurnover()
+	public Double getTurnover()
 	{
 		return turnover;
 	}
 
-	public void setTurnover(double turnover)
+	public void setTurnover(Double turnover)
 	{
 		this.turnover = turnover;
 	}
@@ -109,6 +112,16 @@ public class Company
 		this.companyBrief = companyBrief;
 	}
 
+	public boolean isDeactivated()
+	{
+		return deactivated;
+	}
+
+	public void setDeactivated(boolean deactivated)
+	{
+		this.deactivated = deactivated;
+	}
+
 	public IPO getIpo()
 	{
 		return ipo;
@@ -118,17 +131,7 @@ public class Company
 	{
 		this.ipo = ipo;
 	}
-
-	public List<CompanyStockExchangeMap> getCompstockmap()
-	{
-		return compstockmap;
-	}
-
-	public void setCompstockmap(List<CompanyStockExchangeMap> compstockmap)
-	{
-		this.compstockmap = compstockmap;
-	}
-
+	
 	public Sector getSector()
 	{
 		return sector;

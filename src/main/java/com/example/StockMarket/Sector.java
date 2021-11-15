@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -13,15 +14,15 @@ public class Sector
 {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	private String sectorName;
 	
 	private String brief;
 	
-	@OneToMany(mappedBy="sector")
-	private List<Company> companies=new ArrayList<>();
-	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "sector")
+	private List<Company> companies = new ArrayList<>();
+
 	public Sector() {}
 
 	public Sector(String sectorName, String brief)
@@ -31,12 +32,12 @@ public class Sector
 		this.brief = brief;
 	}
 
-	public int getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}
@@ -60,7 +61,7 @@ public class Sector
 	{
 		this.brief = brief;
 	}
-
+	
 	public List<Company> getCompanies()
 	{
 		return companies;

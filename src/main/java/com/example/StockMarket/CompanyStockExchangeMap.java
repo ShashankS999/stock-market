@@ -1,6 +1,7 @@
 package com.example.StockMarket;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -10,44 +11,26 @@ public class CompanyStockExchangeMap
 {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
-	private String companyCode;
-	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Company company;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private StockExchange stockExchange;
 	
 	public CompanyStockExchangeMap() {}
 
-	public CompanyStockExchangeMap(String companyCode)
-	{
-		super();
-		this.companyCode = companyCode;
-	}
-
-	public int getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}
-
-	public String getCompanyCode()
-	{
-		return companyCode;
-	}
-
-	public void setCompanyCode(String companyCode)
-	{
-		this.companyCode = companyCode;
-	}
-
+	
 	public Company getCompany()
 	{
 		return company;

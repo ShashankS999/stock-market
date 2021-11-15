@@ -10,5 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface StockExchangeRepo extends JpaRepository<StockExchange,Integer>
 {
 	boolean existsByName(String name);
+	StockExchange findByName(String name);
 
 }

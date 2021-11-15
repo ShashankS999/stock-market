@@ -1,10 +1,11 @@
 package com.example.StockMarket;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -15,23 +16,23 @@ public class IPO
 {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
-	private double pricePerShare;
+	private Double pricePerShare;
 	
-	private int totalShares;
+	private Integer totalShares;
 	
-	private LocalDateTime openDateTime;
+	private Date openDateTime;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private Company company;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	private List<StockExchange> stockExchanges=new ArrayList<>();
 	
 	public IPO() {}
 
-	public IPO(double pricePerShare, int totalShares, LocalDateTime openDateTime)
+	public IPO(Double pricePerShare, Integer totalShares, Date openDateTime)
 	{
 		super();
 		this.pricePerShare = pricePerShare;
@@ -39,42 +40,42 @@ public class IPO
 		this.openDateTime = openDateTime;
 	}
 
-	public int getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
-	public double getPricePerShare()
+	public Double getPricePerShare()
 	{
 		return pricePerShare;
 	}
 
-	public void setPricePerShare(double pricePerShare)
+	public void setPricePerShare(Double pricePerShare)
 	{
 		this.pricePerShare = pricePerShare;
 	}
 
-	public int getTotalShares()
+	public Integer getTotalShares()
 	{
 		return totalShares;
 	}
 
-	public void setTotalShares(int totalShares)
+	public void setTotalShares(Integer totalShares)
 	{
 		this.totalShares = totalShares;
 	}
 
-	public LocalDateTime getOpenDateTime()
+	public Date getOpenDateTime()
 	{
 		return openDateTime;
 	}
 
-	public void setOpenDateTime(LocalDateTime openDateTime)
+	public void setOpenDateTime(Date openDateTime)
 	{
 		this.openDateTime = openDateTime;
 	}
